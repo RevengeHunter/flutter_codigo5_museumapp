@@ -1,12 +1,8 @@
 import 'dart:async';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_codigo5_museumapp/ui/general/colors.dart';
-import 'package:flutter_codigo5_museumapp/ui/general/general_widget.dart';
-import 'package:flutter_codigo5_museumapp/ui/responsive/responsive.dart';
 
 import '../ui/widgets/my_intro_slider_widget.dart';
+import 'init_page.dart';
 
 class IntroSliderPage extends StatefulWidget {
   const IntroSliderPage({Key? key}) : super(key: key);
@@ -53,17 +49,62 @@ class _IntroSliderPageState extends State<IntroSliderPage> {
         children: [
           Expanded(
             child: PageView(
-              physics: const BouncingScrollPhysics(),
+              // physics: const BouncingScrollPhysics(),
               controller: _pageController,
               onPageChanged: (int value) {
                 currentPage = value;
                 setState(() {});
               },
               children: [
-                MyIntroSliderWidget(imagePath: 'assets/images/Museo01.jpg',),
-                MyIntroSliderWidget(imagePath: 'assets/images/Museo02.jpeg',),
-                MyIntroSliderWidget(imagePath: 'assets/images/Museo03.jpeg',),
-                MyIntroSliderWidget(imagePath: 'assets/images/Museo04.jpeg',),
+                MyIntroSliderWidget(
+                  imagePath: 'assets/images/Museo01.jpg',
+                  pageId: currentPage,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => InitPage(),
+                      ),
+                    );
+                  },
+                ),
+                MyIntroSliderWidget(
+                  imagePath: 'assets/images/Museo02.jpeg',
+                  pageId: currentPage,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => InitPage(),
+                      ),
+                    );
+                  },
+                ),
+                MyIntroSliderWidget(
+                  imagePath: 'assets/images/Museo03.jpeg',
+                  pageId: currentPage,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => InitPage(),
+                      ),
+                    );
+                  },
+                ),
+                MyIntroSliderWidget(
+                  imagePath: 'assets/images/Museo04.jpeg',
+                  pageId: currentPage,
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => InitPage(),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),

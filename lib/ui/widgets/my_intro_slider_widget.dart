@@ -6,10 +6,12 @@ import '../general/general_widget.dart';
 import '../responsive/responsive.dart';
 
 class MyIntroSliderWidget extends StatelessWidget {
-
   String imagePath;
-  MyIntroSliderWidget({required this.imagePath});
+  int pageId;
+  Function onTap;
 
+  MyIntroSliderWidget(
+      {required this.imagePath, required this.pageId, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +28,15 @@ class MyIntroSliderWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 26.0),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 12.0, horizontal: 26.0),
                 height: ResponsiveUI.pHeight(context, 0.38),
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(80.0),
+                    topRight: Radius.circular(80.0),
                   ),
                 ),
                 child: Column(
@@ -41,55 +45,68 @@ class MyIntroSliderWidget extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
+                        AnimatedContainer(
+                          duration: const Duration(
+                            milliseconds: 600,
+                          ),
                           margin: const EdgeInsets.symmetric(
                             horizontal: 4.0,
                           ),
                           height: 8,
-                          width: 50,
+                          width: pageId == 0 ? 50 : 8,
                           decoration: BoxDecoration(
-                            color: kBrandPrimaryColor,
-                            borderRadius:
-                            BorderRadius.circular(20.0),
+                            color: pageId == 0
+                                ? kBrandPrimaryColor
+                                : kBrandPrimaryColor.withOpacity(0.25),
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
                         ),
-                        Container(
+                        AnimatedContainer(
+                          duration: const Duration(
+                            milliseconds: 600,
+                          ),
                           margin: const EdgeInsets.symmetric(
                             horizontal: 4.0,
                           ),
                           height: 8,
-                          width: 8,
+                          width: pageId == 1 ? 50 : 8,
                           decoration: BoxDecoration(
-                            color: kBrandPrimaryColor
-                                .withOpacity(0.25),
-                            borderRadius:
-                            BorderRadius.circular(20.0),
+                            color: pageId == 1
+                                ? kBrandPrimaryColor
+                                : kBrandPrimaryColor.withOpacity(0.25),
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
                         ),
-                        Container(
+                        AnimatedContainer(
+                          duration: const Duration(
+                            milliseconds: 600,
+                          ),
                           margin: const EdgeInsets.symmetric(
                             horizontal: 4.0,
                           ),
                           height: 8,
-                          width: 8,
+                          width: pageId == 2 ? 50 : 8,
                           decoration: BoxDecoration(
-                            color: kBrandPrimaryColor
-                                .withOpacity(0.25),
-                            borderRadius:
-                            BorderRadius.circular(20.0),
+                            color: pageId == 2
+                                ? kBrandPrimaryColor
+                                : kBrandPrimaryColor.withOpacity(0.25),
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
                         ),
-                        Container(
+                        AnimatedContainer(
+                          duration: const Duration(
+                            milliseconds: 900,
+                          ),
                           margin: const EdgeInsets.symmetric(
                             horizontal: 4.0,
                           ),
                           height: 8,
-                          width: 8,
+                          width: pageId == 3 ? 50 : 8,
                           decoration: BoxDecoration(
-                            color: kBrandPrimaryColor
-                                .withOpacity(0.25),
-                            borderRadius:
-                            BorderRadius.circular(20.0),
+                            color: pageId == 3
+                                ? kBrandPrimaryColor
+                                : kBrandPrimaryColor.withOpacity(0.25),
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
                         ),
                       ],
@@ -119,33 +136,50 @@ class MyIntroSliderWidget extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Omitir",),
-                        SizedBox(width: 12.0,),
-                        Container(
-                          padding: EdgeInsets.all(16.0),
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            shape: BoxShape.circle,
-                            gradient: LinearGradient(
-                              colors: [
-                                Color(0xfff72585),
-                                Color(0xff480ca8),
-                              ],
-                            ),
-                          ),
-                          child: Container(
-                            padding: EdgeInsets.all(2.0),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Icon(
-                              Icons.chevron_right,
-                              color: kBrandPrimaryColor,
-                            ),
-                          ),
-
+                        pageId != 3
+                            ? GestureDetector(
+                                onTap: () {
+                                  onTap();
+                                },
+                                child: const Text(
+                                  "Omitir",
+                                ),
+                              )
+                            : Container(),
+                        SizedBox(
+                          width: 12.0,
                         ),
+                        pageId == 3
+                            ? GestureDetector(
+                                onTap: () {
+                                  onTap();
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(16.0),
+                                  decoration: BoxDecoration(
+                                    color: Colors.red,
+                                    shape: BoxShape.circle,
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Color(0xfff72585),
+                                        Color(0xff480ca8),
+                                      ],
+                                    ),
+                                  ),
+                                  child: Container(
+                                    padding: EdgeInsets.all(2.0),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Icon(
+                                      Icons.chevron_right,
+                                      color: kBrandPrimaryColor,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container(),
                       ],
                     ),
                   ],
